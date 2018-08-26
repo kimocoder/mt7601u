@@ -125,8 +125,7 @@ int mt7601u_vendor_request(struct mt7601u_dev *dev, const u8 req,
 
 void mt7601u_vendor_reset(struct mt7601u_dev *dev)
 {
-	mt7601u_vendor_request(dev, MT_VEND_DEV_MODE, USB_DIR_OUT,
-			       MT_VEND_DEV_MODE_RESET, 0, NULL, 0);
+	//mt7601u_vendor_request(dev, MT_VEND_DEV_MODE, USB_DIR_OUT,MT_VEND_DEV_MODE_RESET, 0, NULL, 0);
 }
 
 u32 mt7601u_rr(struct mt7601u_dev *dev, u32 offset)
