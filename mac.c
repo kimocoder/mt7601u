@@ -405,7 +405,7 @@ mt76_mac_process_rate(struct ieee80211_rx_status *status, u16 rate)
 	case MT_PHY_TYPE_CCK:
 		if (idx >= 8) {
 			idx -= 8;
-			status->flag |= RX_FLAG_SHORTPRE;
+			status->flag |= RX_ENC_FLAG_SHORTPRE;
 		}
 
 		if (WARN_ON(idx >= 4))
@@ -414,10 +414,10 @@ mt76_mac_process_rate(struct ieee80211_rx_status *status, u16 rate)
 		status->rate_idx = idx;
 		return;
 	case MT_PHY_TYPE_HT_GF:
-		status->flag |= RX_FLAG_HT_GF;
+		status->flag |= RX_ENC_FLAG_HT_GF;
 		/* fall through */
 	case MT_PHY_TYPE_HT:
-		status->flag |= RX_FLAG_HT;
+		status->flag |= RX_ENC_HT;
 		status->rate_idx = idx;
 		break;
 	default:
@@ -426,13 +426,13 @@ mt76_mac_process_rate(struct ieee80211_rx_status *status, u16 rate)
 	}
 
 	if (rate & MT_RXWI_RATE_SGI)
-		status->flag |= RX_FLAG_SHORT_GI;
+		status->flag |= RX_ENC_FLAG_SHORT_GI;
 
 	if (rate & MT_RXWI_RATE_STBC)
-		status->flag |= 1 << RX_FLAG_STBC_SHIFT;
+		status->flag |= 1 << RX_ENC_FLAG_STBC_SHIFT;
 
 	if (rate & MT_RXWI_RATE_BW)
-		status->flag |= RX_FLAG_40MHZ;
+		status->flag |= RX_ENC_FLAG_BF;
 }
 
 static void
