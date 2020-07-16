@@ -14,6 +14,13 @@
 
 #ifndef MT7601U_H
 #define MT7601U_H
+//just for kali 2018.2 kernel version >4.15
+#define RX_FLAG_SHORTPRE   (1<<8 )
+#define RX_FLAG_HT_GF      (1<<13)
+#define RX_FLAG_HT         (1<<9 )
+#define RX_FLAG_SHORT_GI   (1<<11)
+#define RX_FLAG_40MHZ      (1<<10)
+#define RX_FLAG_STBC_SHIFT (26)
 
 #include <linux/kernel.h>
 #include <linux/device.h>
