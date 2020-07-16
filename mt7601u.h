@@ -400,4 +400,6 @@ void mt7601u_dma_cleanup(struct mt7601u_dev *dev);
 int mt7601u_dma_enqueue_tx(struct mt7601u_dev *dev, struct sk_buff *skb,
 			   struct mt76_wcid *wcid, int hw_q);
 
+void* devm_kmemdup(struct mt7601u_dev *dev, const struct ieee80211_channel, int, GFP_KERNEL)
+
 #endif
