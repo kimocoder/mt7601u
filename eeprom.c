@@ -20,6 +20,10 @@
 #include "mt7601u.h"
 #include "eeprom.h"
 
+char *mt_initmac;
+
+module_param(mt_initmac, charp, 0644);
+
 static bool
 field_valid(u8 val)
 {
@@ -137,9 +141,16 @@ mt7601u_set_chip_cap(struct mt7601u_dev *dev, u8 *eeprom)
 static int
 mt7601u_set_macaddr(struct mt7601u_dev *dev, const u8 *eeprom)
 {
+
+	u8 mac[ETH_ALEN];
+
 	const void *src = eeprom + MT_EE_MAC_ADDR;
 
-	ether_addr_copy(dev->macaddr, src);
+	if (mt_initmac && mac_pton(mt_initmac, mac)) {
+		memcpy(dev->macaddr, mac, ETH_ALEN);
+	} else {
+		ether_addr_copy(dev->macaddr, src);
+	}
 
 	if (!is_valid_ether_addr(dev->macaddr)) {
 		eth_random_addr(dev->macaddr);
